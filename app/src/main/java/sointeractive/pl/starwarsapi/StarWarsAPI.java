@@ -1,5 +1,7 @@
 package sointeractive.pl.starwarsapi;
 
+import android.database.Observable;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -17,4 +19,8 @@ public interface StarWarsAPI {
 
     @GET("people/{id}")
     Call<StarWarsCharacter> getCharacterById(@Path("id") int id);
+
+
+    @GET("people/{id}")
+    rx.Observable<StarWarsCharacter> getRxCharacterById(@Path("id") int id);
 }

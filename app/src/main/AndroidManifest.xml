@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sointeractive.pl.starwarsapi">
+    package="sointeractive.pl.starwarsapi" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,10 +8,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".SingleCallActivity"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".RxJavaActivity"
+            android:label="@string/title_activity_rx_java" />
+
+        <activity
+            android:name=".CoreActivity"
+            android:label="@string/title_activity_core" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

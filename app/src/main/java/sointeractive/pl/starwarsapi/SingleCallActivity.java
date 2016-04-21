@@ -3,19 +3,19 @@ package sointeractive.pl.starwarsapi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class SingleCallActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = SingleCallActivity.class.getSimpleName();
 
     TextView characterInfo;
     ProgressBar progressBar;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "downloadData ");
         //show progress bar: indicate HTTP request delay
         showProgressBar();
-        StarWarsClient.getApi().getCharacterById(1).enqueue(new Callback<StarWarsCharacter>() {
+        StarWarsClient.getApi().getCharacterById(1 + new Random().nextInt(70)).enqueue(new Callback<StarWarsCharacter>() {
             @Override
             public void onResponse(Call<StarWarsCharacter> call, Response<StarWarsCharacter> response) {
                 Log.d(TAG, "onResponse " + response.isSuccessful());
