@@ -19,8 +19,7 @@ public class CoreActivity extends AppCompatActivity {
 
         single.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                gotoActivity(SingleCallActivity.class);
+            public void onClick(View v) {gotoActivity(SingleCallActivity.class);
             }
         });
 

@@ -24,7 +24,7 @@ public class StarWarsAdapter extends RecyclerView.Adapter<StarWarsAdapter.ItemVi
 
     public static final String TAG = StarWarsAdapter.class.getSimpleName();
 
-    ArrayList<StarWarsCharacter> dataSet = new ArrayList<>();
+    public ArrayList<StarWarsCharacter> dataSet = new ArrayList<>();
 
     public StarWarsAdapter(ArrayList<StarWarsCharacter> dataSet) {
         this.dataSet = dataSet;
@@ -53,9 +53,6 @@ public class StarWarsAdapter extends RecyclerView.Adapter<StarWarsAdapter.ItemVi
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-
-        //root in hierarchy
-        public View view;
 
         public TextView name;
         public TextView mass;

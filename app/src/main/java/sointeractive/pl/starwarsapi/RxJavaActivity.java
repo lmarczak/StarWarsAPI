@@ -33,9 +33,20 @@ public class RxJavaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java);
 
-        progressBar = (ProgressBar) findViewById(R.id.rx_progress_bar);
+        setupViews();
         setupRecyclerView();
         downloadData();
+    }
+
+    private void setupViews() {
+        progressBar = (ProgressBar) findViewById(R.id.rx_progress_bar);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        starWarsAdapter = new StarWarsAdapter(new ArrayList<StarWarsCharacter>());
+        recyclerView.setAdapter(starWarsAdapter);
     }
 
     private void downloadData() {
@@ -45,34 +56,33 @@ public class RxJavaActivity extends AppCompatActivity {
         subscription = Observable.range(1, 10).flatMap(new Func1<Integer, Observable<StarWarsCharacter>>() {
             @Override
             public Observable<StarWarsCharacter> call(Integer characterId) {
-                return StarWarsClient.getRxApi().getRxCharacterById(characterId).onErrorReturn(new Func1<Throwable, StarWarsCharacter>() {
+                return StarWarsClient.getRxApi().getRxCharacterById(characterId).onErrorResumeNext(new Func1<Throwable, Observable<? extends StarWarsCharacter>>() {
                     @Override
-                    public StarWarsCharacter call(Throwable throwable) {
-                        return new StarWarsCharacter();
+                    public Observable<? extends StarWarsCharacter> call(Throwable throwable) {
+                        return Observable.empty();
                     }
                 });
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StarWarsCharacter>() {
-                    @Override
-                    public void onCompleted() {
-                        starWarsAdapter.notifyItemRangeChanged(0, starWarsAdapter.getItemCount());
-                        hideProgressBar();
-                    }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<StarWarsCharacter>() {
+            @Override
+            public void onCompleted() {
+                starWarsAdapter.notifyItemRangeChanged(0, starWarsAdapter.getItemCount());
+                hideProgressBar();
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError " + e.getMessage());
-                        e.printStackTrace();
-                        hideProgressBar();
-                        Toast.makeText(RxJavaActivity.this, "Cannot download data", Toast.LENGTH_SHORT).show();
-                    }
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError " + e.getMessage());
+                e.printStackTrace();
+                hideProgressBar();
+                Toast.makeText(RxJavaActivity.this, "Cannot download data", Toast.LENGTH_SHORT).show();
+            }
 
-                    @Override
-                    public void onNext(StarWarsCharacter starWarsCharacter) {
-                        starWarsAdapter.dataSet.add(starWarsCharacter);
-                    }
-                });
+            @Override
+            public void onNext(StarWarsCharacter starWarsCharacter) {
+                starWarsAdapter.dataSet.add(starWarsCharacter);
+            }
+        });
     }
 
     private void showProgressBar() {
@@ -81,13 +91,6 @@ public class RxJavaActivity extends AppCompatActivity {
 
     private void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
-    }
-
-    private void setupRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        starWarsAdapter = new StarWarsAdapter(new ArrayList<StarWarsCharacter>());
-        recyclerView.setAdapter(starWarsAdapter);
     }
 
     @Override

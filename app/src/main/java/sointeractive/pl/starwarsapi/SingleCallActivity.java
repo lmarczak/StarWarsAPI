@@ -19,8 +19,8 @@ public class SingleCallActivity extends AppCompatActivity {
 
     public static final String TAG = SingleCallActivity.class.getSimpleName();
 
-    TextView characterInfo;
-    ProgressBar progressBar;
+    private TextView characterInfo;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
