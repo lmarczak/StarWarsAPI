@@ -1,4 +1,4 @@
-package sointeractive.pl.starwarsapi;
+package sointeractive.pl.starwarsapi.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

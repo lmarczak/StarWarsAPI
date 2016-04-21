@@ -1,4 +1,4 @@
-package sointeractive.pl.starwarsapi;
+package sointeractive.pl.starwarsapi.network;
 
 import java.util.ArrayList;
 import java.util.List;

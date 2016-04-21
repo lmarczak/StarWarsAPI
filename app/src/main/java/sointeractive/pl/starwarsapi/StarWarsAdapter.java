@@ -15,8 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
 import java.util.ArrayList;
+
+import sointeractive.pl.starwarsapi.network.StarWarsCharacter;
 
 
 public class StarWarsAdapter extends RecyclerView.Adapter<StarWarsAdapter.ItemViewHolder> {

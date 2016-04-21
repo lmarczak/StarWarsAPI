@@ -12,6 +12,8 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sointeractive.pl.starwarsapi.network.StarWarsCharacter;
+import sointeractive.pl.starwarsapi.network.StarWarsClient;
 
 public class SingleCallActivity extends AppCompatActivity {
 

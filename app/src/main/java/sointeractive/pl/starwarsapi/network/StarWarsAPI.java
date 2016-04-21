@@ -1,6 +1,4 @@
-package sointeractive.pl.starwarsapi;
-
-import android.database.Observable;
+package sointeractive.pl.starwarsapi.network;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
